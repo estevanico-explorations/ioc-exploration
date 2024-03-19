@@ -1,0 +1,26 @@
+{
+  "name": "di-containers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn src/index.ts -- watch=injectable",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@injectable-ts/core": "1.0.0-beta.0",
+    "@types/node": "^20.11.28",
+    "i": "^0.3.7",
+    "injectx": "^1.0.4",
+    "npm": "^10.5.0",
+    "ts-import": "^5.0.0-beta.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.2"
+  },
+  "devDependencies": {
+    "ts-node-dev": "^2.0.0"
+  }
+}
