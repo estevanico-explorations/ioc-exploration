@@ -31,7 +31,8 @@ const movieService = injectable(apiUrl, (apiUrl: string): MovieService => ({
   fetchMovies: (authToken: string): string[] => ['movie()'],
 }))
 
-const loggerOverride: Logger = { log: () => { console.log('OVERRIDDEN LOGGER') }}
+// Don't forget to add the log params here :)
+const loggerOverride: Logger = { log: (args) => { console.log('[OVERRIDDEN LOGGER]', args) }}
 
 const configs = {
   API_URL: 'https://my-api.com',
