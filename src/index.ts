@@ -1,4 +1,4 @@
-import { constructorDeps, objectDeps, overriddenDeps, combinedDeps, treeDeps } from './injectable-ts'
+import { constructorDeps, objectDeps, overriddenDeps, combinedDeps, treeDeps, deepDeps } from './injectable-ts'
 
 const injectableTS = () => {
   /**
@@ -9,20 +9,23 @@ const injectableTS = () => {
   // --- RUN APPLICATIONS ----------------------------
   console.clear()
 
-  console.log('--- OBJECT PARAM ---------------------------------')
-  objectDeps()
-
-  console.log('\n--- FUNCTION LIST PARAM -------------------------')
-  constructorDeps()
-
-  console.log('\n--- OVERRIDDEN DEPS -----------------------------')
-  overriddenDeps()
+  console.log('--- DEEP TREE ------------------------------------')
+  deepDeps()
   
-  console.log('\n--- COMBINED DEPS -------------------------------')
-  combinedDeps()
+  // console.log('--- OBJECT PARAM ---------------------------------')
+  // objectDeps()
+
+  // console.log('\n--- FUNCTION LIST PARAM -------------------------')
+  // constructorDeps()
+
+  // console.log('\n--- OVERRIDDEN DEPS -----------------------------')
+  // overriddenDeps()
   
-  console.log('\n--- TREE DEPS -----------------------------------')
-  treeDeps()
+  // console.log('\n--- COMBINED DEPS -------------------------------')
+  // combinedDeps()
+  
+  // console.log('\n--- TREE DEPS -----------------------------------')
+  // treeDeps()
 
   // --- EXPECTED OUTPUT -----------------------------
   //

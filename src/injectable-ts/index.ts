@@ -1,43 +1,7 @@
 import { injectable, token, provide } from '@injectable-ts/core'
-
-// --- TOKENS --------------------------------------
-export interface AuthService {
-  authorize(login: string, password: string): string
-}
-
-export interface MovieService {
-  fetchMovies(authToken: string): string[]
-}
-
-export interface Logger {
-  log(...args: readonly unknown[]): void
-}
-
-export interface EntryPoint {
-  (login: string, password: string): Promise<void>
-}
-
-// --- INJECTABLES -----------------------------------------
-const apiUrl = token('API_URL')<string>()
-const db = token('DB')<any>()
-
-export const logger = injectable('LOGGER', db, (): Logger => console)
-
-export const authService = injectable(apiUrl, (apiUrl: string): AuthService => ({
-  authorize: (login: string, password: string): string => `auth token`
-}))
-
-export const movieService = injectable(apiUrl, (apiUrl: string): MovieService => ({
-  fetchMovies: (authToken: string): string[] => ['movie()'],
-}))
-
-// Don't forget to add the log params here :)
-export const loggerOverride: Logger = { log: (args) => { console.log('[OVERRIDDEN LOGGER]', args) } }
-
-export const configs = {
-  API_URL: 'https://my-api.com',
-  DB: '{ some object }'
-}
+import { Logger, AuthService, MovieService, EntryPoint } from './types'
+import { logger, movieService, authService, loggerOverride, multipleTokens, andricService } from './services'
+import { configs } from './configs'
 
 // --- MAIN ----------------------------------------------
 export const overriddenDeps = () => {
@@ -168,4 +132,35 @@ export const combinedDeps = () => {
  */
 export const treeDeps = () => {
   console.log('[TODO]')
+}
+
+const services = {
+  multipleTokens,
+  logger,
+  andricService,
+}
+
+/**
+ * There is some confusion in the documentation and the new example clears
+ * it up a bunch. Using the object is much simpler and doesn't require the
+ * order to be correct.
+ * 
+ * @see https://github.com/raveclassic/injectable-ts/issues/22
+ */
+export const deepDeps = () => {
+  const entryPoint = injectable(services, ({ multipleTokens, logger, andricService }): any =>
+    async (name: any, nonsense: string): Promise<void> => {
+      logger.log('name:', name)
+      logger.log('nonsense:', nonsense)
+      logger.log('anotherInjectable():', multipleTokens.fetchMovies('__TOKEN__'))
+
+      console.log(andricService)
+    }
+  )
+
+  const run = entryPoint(configs)
+
+  // console.log('configs', configs)
+
+  run('John Doe', 'qweqwe')
 }
