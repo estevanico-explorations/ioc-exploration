@@ -1,0 +1,2 @@
+# Thoughts
+Misc thoughts. Think of this document as a [`Fleeting Note`](https://haikal.blog/my-zettelkasten-journey-understanding-the-differences-between-fleeting-notes-literature-notes-reference-notes-and-permanent-notes/)
